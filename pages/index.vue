@@ -7,13 +7,13 @@
       <div
         v-for="listing in listings"
         :key="listing.id"
-        class="individual bg-white shadow-listing mb-bottom p-list rounded-sm flex content-center last:mb-0"
+        class="bg-white shadow-listing mb-bottom p-list rounded-sm flex content-center last:mb-0"
         :class="[
           'id-' + listing.id,
+          getTag(listing),
           listing.featured ? 'border-l-4 border-teal-500' : '',
         ]"
       >
-        <p>{{ getTag({ listing }) }}</p>
         <img class="w-image h-image" fit="contain" :src="listing.logo" />
         <div class="flex flex-col ml-3 justify-between">
           <div class="flex items-center">
@@ -41,26 +41,14 @@
           </div>
         </div>
         <div class="flex items-center ml-auto">
-          <template v-for="name in Object.keys(listing)">
-            <template v-if="name == 'location' || name == 'level'">
-              <p
-                class="ml-2 bg-blue-light text-teal rounded-sm font-medium px-2 py-1"
-                :key="name"
-              >
-                {{ listing[name] }}
-              </p>
-            </template>
-            <template v-else-if="name == 'languages' || name == 'tools'">
-              <template v-for="value in listing[name]">
-                <p
-                  class="ml-2 bg-blue-light text-teal rounded-sm font-medium px-2 py-1"
-                  :key="value"
-                >
-                  {{ value }}
-                </p>
-              </template>
-            </template>
-          </template>
+          <p
+            v-for="x in getTag(listing).flat(2)"
+            :key="x"
+            v-on:click="filter(x)"
+            class="ml-2 bg-blue-light text-teal rounded-sm font-medium px-2 py-1"
+          >
+            {{ x }}
+          </p>
         </div>
       </div>
     </div>
@@ -69,25 +57,28 @@
 
 <script>
 export default {
-  data: () => ({
-    listings: [],
-  }),
+  data() {
+    return {
+      listings: [],
+      activeClass: [],
+    };
+  },
   mounted() {
     this.listings = require(`@/assets/data/data.json`);
   },
   methods: {
-    getTag: (listing) => {
-      var tag;
-      console.log(listing);
-      for (item in Object.keys(listing.listing)) {
-        console.log(item);
-        // if (item == "location" || item == "level") {
-        //   console.log(item.value());
-        //   tag.push(item);
-        // } else if (item == "languages" || item == "tools") {
-        //   console.log(item.value());
-        //   tag.push(item.value());
-        // }
+    filter(tag) {
+      this.activeClass.push(tag);
+      return this.activeClass;
+    },
+    getTag(listing) {
+      let tag = [];
+      for (const key in listing) {
+        if (key == "level") {
+          tag.push(listing[key]);
+        } else if (key == "languages" || key == "tools") {
+          tag.push(listing[key]);
+        }
       }
       return tag;
     },
