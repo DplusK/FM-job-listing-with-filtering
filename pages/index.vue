@@ -77,7 +77,9 @@
               >{{ listing.location }}
             </div>
           </div>
-          <div class="flex items-center lg:ml-auto flex-wrap mt-3 lg:mt-0">
+          <div
+            class="flex items-center lg:ml-auto flex-wrap mt-3 lg:mt-0 lg:border-t-0 border-t border-gray-400 pt-3 lg:pt-0"
+          >
             <p
               v-for="x in getTag(listing).flat(2)"
               :key="x"
