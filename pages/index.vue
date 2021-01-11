@@ -46,8 +46,7 @@
           ]"
         >
           <img
-            class="h-image w-image min-h-image min-w-image transform absolute lg:relative -top-image lg:top-0"
-            fit="contain"
+            class="h-image w-image min-h-image min-w-image absolute lg:relative -top-image lg:top-0"
             :src="listing.logo"
             :alt="listing.company"
           />
