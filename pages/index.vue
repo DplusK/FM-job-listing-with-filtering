@@ -49,6 +49,7 @@
             class="h-image w-image min-h-image min-w-image transform absolute lg:relative -top-image lg:top-0"
             fit="contain"
             :src="listing.logo"
+            :alt="listing.company"
           />
           <div class="flex flex-col lg:ml-4 justify-between mt-image-m lg:mt-0">
             <div class="flex items-center flex-wrap">
