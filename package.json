@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
-    "generate": "nuxt generate"
+    "build": "nuxt generate"
   },
   "dependencies": {
     "core-js": "^3.6.5",
